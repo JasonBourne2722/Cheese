@@ -1,0 +1,286 @@
+:root {
+  --bg: #10100f;
+  --panel: #181816;
+  --text: #f8f3de;
+  --muted: #c7bf9e;
+  --cheese: #ffcf3d;
+  --cheese-dark: #e3ae13;
+  --accent: #7dff8c;
+  --danger: #ff7a52;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%, #303021 0%, transparent 38%),
+    radial-gradient(circle at 90% 10%, #312009 0%, transparent 30%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  opacity: 0.08;
+  background-image: radial-gradient(#f0e3b5 0.65px, transparent 0.65px);
+  background-size: 3px 3px;
+}
+
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgb(10 10 9 / 52%), rgb(10 10 9 / 62%)),
+    url("./assets/character-main.png") center / cover no-repeat;
+  padding: 1rem 1.2rem 1.6rem;
+}
+
+.social-image-button {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 0;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+}
+
+.social-image-button img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 7px 14px rgb(0 0 0 / 34%));
+}
+
+.social-image-button span {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.social-image-button:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.social-image-button.fallback span {
+  display: inline-flex;
+}
+
+.hero-content {
+  max-width: 1150px;
+  margin: 0 auto;
+  min-height: calc(100vh - 32px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 0.5rem;
+  position: relative;
+}
+
+.hero-copy {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  backdrop-filter: none;
+  padding: 0.4rem 0;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(8px, 2.5vh, 26px);
+  margin-right: clamp(8px, 2vw, 20px);
+}
+
+.hero-logo {
+  width: min(34vw, 255px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgb(0 0 0 / 55%));
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-family: "Luckiest Guy", "Inter", sans-serif;
+  letter-spacing: 0.4px;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-floating-cta {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(22px, 6vh, 62px);
+  margin-top: 0;
+}
+
+.cheese-buy-button {
+  width: 116px;
+  height: 88px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  filter: drop-shadow(0 8px 16px rgb(0 0 0 / 35%));
+  transition: transform 160ms ease;
+}
+
+.buy-label {
+  position: absolute;
+  left: 46%;
+  top: 58%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-family: "Luckiest Guy", "Inter", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.8px;
+  color: #fff7d1;
+  text-shadow:
+    -2px -2px 0 #201600,
+    2px -2px 0 #201600,
+    -2px 2px 0 #201600,
+    2px 2px 0 #201600,
+    0 3px 8px rgb(0 0 0 / 45%);
+  pointer-events: none;
+}
+
+.cheese-buy-button:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.cheese-buy-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+main {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem 2.5rem;
+}
+
+.section {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+h2 {
+  margin: 0;
+  font-family: "Luckiest Guy", "Inter", sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  letter-spacing: 0.6px;
+}
+
+.chronicle-layout {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.shred-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.85rem;
+}
+
+.shred-card h3 {
+  margin: 0;
+  color: var(--cheese);
+  font-family: "Luckiest Guy", "Inter", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.shred-card p {
+  margin: 0.55rem 0 0;
+  color: #dbd2b0;
+  line-height: 1.45;
+}
+
+.newspaper-gallery {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.paper {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+}
+
+.gallery-note {
+  margin: 0.7rem 0 0;
+  color: #b7ad89;
+  font-size: 0.9rem;
+}
+
+code {
+  background: #25241e;
+  border: 0;
+  border-radius: 5px;
+  padding: 0.1rem 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: 1rem;
+  }
+
+  .hero-content {
+    min-height: 420px;
+  }
+
+  .hero-copy {
+    margin-top: clamp(8px, 3.5vh, 28px);
+    margin-right: 0;
+  }
+
+  .hero-logo {
+    width: min(56vw, 260px);
+  }
+
+  .hero-floating-cta {
+    bottom: clamp(14px, 4vh, 30px);
+  }
+
+  .chronicle-layout,
+  .newspaper-gallery {
+    grid-template-columns: 1fr;
+  }
+}

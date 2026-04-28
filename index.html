@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheese Pepe ETH | OG Cheese Pepe CTO</title>
+    <meta
+      name="description"
+      content="Official OG Cheese Pepe CTO on Ethereum. Older than the Solana version. Catch the Daily Shred from The Cheese Chronicle."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="grain-overlay"></div>
+    <header class="hero">
+      <section class="hero-content">
+        <div class="hero-copy">
+          <img
+            class="hero-logo"
+            src="./assets/logo-cheese-pepe-cto.png"
+            alt="Cheese Pepe CTO logo"
+            data-cutout="true"
+          />
+        </div>
+        <div class="cta-row hero-floating-cta">
+          <a
+            class="cheese-buy-button"
+            href="https://app.uniswap.org/#/swap?outputCurrency=0x44444e3196faeF2FBe917622202CdD2dcCcB021B"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Buy Cheese Pepe on Uniswap"
+          >
+            <img src="./assets/buy-button.png" alt="Buy button shaped like cheese wedge" data-cutout="true" />
+            <span class="buy-label">BUY</span>
+          </a>
+          <a
+            class="social-image-button x-button"
+            href="https://x.com/cheesedpepeeth"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Follow on X"
+          >
+            <img src="./assets/x-button.png" alt="X button art" data-cutout="true" onerror="this.parentElement.classList.add('fallback')" />
+            <span>X</span>
+          </a>
+          <a
+            class="social-image-button tg-button"
+            href="https://t.me/CHEESE_ETH"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Join Telegram"
+          >
+            <img src="./assets/telegram-button.png" alt="Telegram button art" data-cutout="true" onerror="this.parentElement.classList.add('fallback')" />
+            <span>TG</span>
+          </a>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section daily-shred">
+        <div class="section-heading">
+          <h2>Daily Shred</h2>
+          <p>Fresh snippets straight from <strong>The Cheese Chronicle</strong>.</p>
+        </div>
+
+        <div class="chronicle-layout">
+          <article class="shred-card">
+            <h3>Morning Melt</h3>
+            <p>
+              "OG cheese pepe on Eth has Solana holders worried"
+            </p>
+          </article>
+          <article class="shred-card">
+            <h3>Midday Crumble</h3>
+            <p>
+              "Eth cheese is climbing dangerously close to flipping Solana Cheese"
+            </p>
+          </article>
+        </div>
+
+        <div class="newspaper-gallery">
+          <img
+            src="./assets/chronicle-1.png"
+            alt="Cheese Chronicle newspaper clipping 1"
+            class="paper"
+          />
+          <img
+            src="./assets/chronicle-2.png"
+            alt="Cheese Chronicle newspaper clipping 2"
+            class="paper"
+          />
+        </div>
+        <p class="gallery-note">
+          Keep these newspaper images unchanged in
+          <code>site/assets/chronicle-1.png</code>,
+          <code>site/assets/chronicle-2.png</code>.
+        </p>
+      </section>
+    </main>
+    <script>
+      (function applyImageCutout() {
+        const images = document.querySelectorAll("img[data-cutout='true']");
+        images.forEach((img) => {
+          if (!img.complete) {
+            img.addEventListener("load", () => cutoutImage(img), { once: true });
+          } else {
+            cutoutImage(img);
+          }
+        });
+
+        function cutoutImage(img) {
+          const w = img.naturalWidth;
+          const h = img.naturalHeight;
+          if (!w || !h) return;
+
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d", { willReadFrequently: true });
+          ctx.drawImage(img, 0, 0);
+
+          const frame = ctx.getImageData(0, 0, w, h);
+          const data = frame.data;
+          const visited = new Uint8Array(w * h);
+          const queue = [];
+
+          const corners = [
+            colorAt(0, 0),
+            colorAt(w - 1, 0),
+            colorAt(0, h - 1),
+            colorAt(w - 1, h - 1),
+          ];
+
+          // Remove border-connected background similar to corner tones
+          for (let x = 0; x < w; x++) {
+            pushIfBackground(x, 0);
+            pushIfBackground(x, h - 1);
+          }
+          for (let y = 1; y < h - 1; y++) {
+            pushIfBackground(0, y);
+            pushIfBackground(w - 1, y);
+          }
+
+          while (queue.length) {
+            const [x, y] = queue.pop();
+            const idx = y * w + x;
+            if (visited[idx]) continue;
+            visited[idx] = 1;
+            alphaAt(x, y, 0);
+
+            if (x > 0) pushIfBackground(x - 1, y);
+            if (x < w - 1) pushIfBackground(x + 1, y);
+            if (y > 0) pushIfBackground(x, y - 1);
+            if (y < h - 1) pushIfBackground(x, y + 1);
+          }
+
+          ctx.putImageData(frame, 0, 0);
+          img.src = canvas.toDataURL("image/png");
+
+          function colorAt(x, y) {
+            const i = (y * w + x) * 4;
+            return [data[i], data[i + 1], data[i + 2]];
+          }
+
+          function alphaAt(x, y, a) {
+            const i = (y * w + x) * 4;
+            data[i + 3] = a;
+          }
+
+          function pushIfBackground(x, y) {
+            const idx = y * w + x;
+            if (visited[idx]) return;
+            const i = idx * 4;
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            const a = data[i + 3];
+            if (a === 0) return;
+
+            // Keep it strict so we preserve dark outlines/details.
+            const isNearCorner = corners.some(([cr, cg, cb]) => {
+              return (
+                Math.abs(r - cr) < 34 &&
+                Math.abs(g - cg) < 34 &&
+                Math.abs(b - cb) < 34
+              );
+            });
+            const isCheckerLike =
+              Math.abs(r - g) < 12 && Math.abs(g - b) < 12 && r > 150;
+            const isVeryDarkBg = r < 26 && g < 26 && b < 26;
+
+            if (isNearCorner || isCheckerLike || isVeryDarkBg) {
+              queue.push([x, y]);
+            }
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
