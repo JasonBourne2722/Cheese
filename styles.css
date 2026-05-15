@@ -172,6 +172,48 @@ body {
   transform: translateY(-2px) scale(1.02);
 }
 
+.racer-button {
+  width: 82px;
+  height: 82px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  text-decoration: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe774 0%, #f7bc25 58%, #da7b10 100%);
+  border: 3px solid #fff0a8;
+  color: #201600;
+  box-shadow:
+    inset 0 4px rgb(255 255 255 / 35%),
+    0 7px 0 #673700,
+    0 13px 20px rgb(0 0 0 / 34%);
+  filter: drop-shadow(0 7px 14px rgb(0 0 0 / 22%));
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.racer-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    inset 0 4px rgb(255 255 255 / 35%),
+    0 9px 0 #673700,
+    0 17px 24px rgb(0 0 0 / 38%);
+}
+
+.racer-icon {
+  font-size: 1.72rem;
+  line-height: 1;
+}
+
+.racer-label {
+  font-family: "Luckiest Guy", "Inter", sans-serif;
+  font-size: 0.86rem;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 55%);
+}
+
 .cheese-buy-button img {
   width: 100%;
   height: 100%;
